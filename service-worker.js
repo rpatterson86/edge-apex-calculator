@@ -1,10 +1,11 @@
-const CACHE_NAME = "edge-apex-companion-v14-centered-controls";
+const CACHE_NAME = "edge-apex-companion-v15-update-notice";
 const FILES = [
   "./",
   "./index.html",
   "./src/style.css",
   "./src/app.js",
   "./manifest.json",
+  "./version.json",
   "./assets/icons/icon-180.png",
   "./assets/icons/icon-192.png",
   "./assets/icons/icon-512.png"

@@ -219,6 +219,64 @@ el("tabClearance").onclick = () => switchMode("clearance");
   });
 });
 
+
+const APP_VERSION = "1.5";
+
+function parseVersion(version) {
+  return String(version).split(".").map(part => parseInt(part, 10) || 0);
+}
+
+function isNewerVersion(remote, current) {
+  const r = parseVersion(remote);
+  const c = parseVersion(current);
+  const length = Math.max(r.length, c.length);
+  for (let i = 0; i < length; i++) {
+    if ((r[i] || 0) > (c[i] || 0)) return true;
+    if ((r[i] || 0) < (c[i] || 0)) return false;
+  }
+  return false;
+}
+
+async function checkForUpdate(showIfCurrent = false) {
+  try {
+    const response = await fetch("./version.json?cacheBust=" + Date.now(), { cache: "no-store" });
+    const info = await response.json();
+    const card = el("updateCard");
+    const msg = el("updateMessage");
+
+    if (isNewerVersion(info.version, APP_VERSION)) {
+      msg.textContent = "Version " + info.version + " is available. You are using version " + APP_VERSION + ".";
+      card.classList.remove("hidden");
+    } else if (showIfCurrent) {
+      alert("You are up to date. Current version: " + APP_VERSION);
+    }
+  } catch (error) {
+    if (showIfCurrent) {
+      alert("Could not check for updates. Try again while connected to the internet.");
+    }
+  }
+}
+
+async function updateNow() {
+  try {
+    if ("serviceWorker" in navigator) {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      for (const registration of registrations) {
+        await registration.update();
+      }
+    }
+
+    if ("caches" in window) {
+      const keys = await caches.keys();
+      await Promise.all(keys.map(key => caches.delete(key)));
+    }
+
+    window.location.reload();
+  } catch (error) {
+    alert("To update: close this app completely, then reopen it. If needed, remove it from Home Screen and add it again from Safari.");
+  }
+}
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./service-worker.js").catch(() => {});
@@ -228,3 +286,4 @@ if ("serviceWorker" in navigator) {
 load();
 formatVisibleValues();
 switchMode(mode);
+checkForUpdate(false);

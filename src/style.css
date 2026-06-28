@@ -456,3 +456,28 @@ input {
     font-size: clamp(3.9rem, 20vw, 5.2rem);
   }
 }
+
+
+/* v1.5 update notice */
+.update-card {
+  margin-top: 16px;
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(255,138,0,.14), rgba(255,255,255,.025));
+  border: 1px solid rgba(255,138,0,.35);
+  border-radius: 28px;
+  box-shadow: 0 24px 70px rgba(0,0,0,.42);
+}
+
+.update-card p,
+.update-card ol {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.update-card ol {
+  padding-left: 22px;
+}
+
+.small-note {
+  font-size: .92rem;
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>EDGE Apex Companion v1.4</title>
+  <title>EDGE Apex Companion v1.5</title>
   <meta name="description" content="Grip Length and Support Clearance calculator for the EDGE Apex workflow.">
   <meta name="theme-color" content="#0D0F12">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -126,6 +126,8 @@
     <details class="settings-card">
       <summary>About This App</summary>
       <p class="about-copy">EDGE Apex Companion is a development build for calculating Grip Length and Support Clearance.</p>
+      <p class="about-copy"><strong>Current version:</strong> 1.5</p>
+      <button class="secondary-action" type="button" onclick="checkForUpdate(true)">Check for Update</button>
       <ul class="checklist">
         <li>✅ App icon finalized</li>
         <li>✅ Hero image finalized</li>
@@ -144,7 +146,22 @@
       </div>
     </section>
 
-    <footer class="footer">Version 1.4 centered controls development build</footer>
+    <section class="update-card hidden" id="updateCard">
+      <div>
+        <strong>Update Available</strong>
+        <p id="updateMessage">A newer version of EDGE Apex Companion is available.</p>
+        <ol>
+          <li>Open this app while connected to the internet.</li>
+          <li>Tap <strong>Update Now</strong>.</li>
+          <li>Close the Home Screen app completely.</li>
+          <li>Reopen it.</li>
+        </ol>
+        <p class="small-note">If it still does not update, remove it from the Home Screen and add it again from Safari.</p>
+      </div>
+      <button class="secondary-action" type="button" onclick="updateNow()">Update Now</button>
+    </section>
+
+    <footer class="footer">Version 1.5 update notice development build</footer>
   </main>
 
   <div id="toast" role="status">Copied</div>

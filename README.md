@@ -1,6 +1,6 @@
 # EDGE Apex Companion
 
-## Version 1.4
+## Version 1.5
 
 - Removed the large hero image for a cleaner app layout.
 - Enlarged phone controls, input numbers, units, and result display.
@@ -40,15 +40,23 @@ Precision sharpening calculator for the EDGE Apex workflow.
 - Visual Setup Assistant
 
 
-### Version 1.4
+### Version 1.5
 
 - Phone-first large controls release.
 - Updated cache version so GitHub Pages and Home Screen installs refresh correctly.
 
 
-### Version 1.4
+### Version 1.5
 
 - Centered controls for iPhone use.
 - Units are now shown inside the value fields.
 - Larger circular plus/minus controls.
 - Result card centered for easier reading.
+
+
+### Version 1.5
+
+- Added update notification system.
+- Added Check for Update button in About.
+- Added Update Available card with iPhone Home Screen update instructions.
+- Added version.json for future update checks.
