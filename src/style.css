@@ -283,7 +283,82 @@ summary {
   .app-shell { padding-left: 12px; padding-right: 12px; }
   .app-icon { width: 48px; height: 48px; }
   h1 { font-size: 1.52rem; }
-  .control { grid-template-columns: 42px 1fr 42px 36px; }
+  .control { grid-template-columns: 58px 1fr 58px 42px; }
   .result-card { grid-template-columns: 1fr; }
   .copy-btn { width: 100%; }
+}
+
+
+/* v1.2 phone-first control sizing */
+.control {
+  grid-template-columns: 64px 1fr 64px 48px;
+  gap: 12px;
+}
+
+.control button {
+  width: 64px;
+  height: 64px;
+  font-size: 2.25rem;
+  line-height: 1;
+  font-weight: 950;
+}
+
+input {
+  height: 64px;
+  font-size: 2.35rem;
+  font-weight: 950;
+}
+
+.control span {
+  font-size: 1.55rem;
+}
+
+.field-card {
+  padding: 18px;
+  margin-top: 16px;
+}
+
+label {
+  font-size: 1.25rem;
+}
+
+.result-value {
+  font-size: clamp(4.2rem, 20vw, 5.6rem);
+}
+
+.result-help {
+  font-size: 1.15rem;
+}
+
+.copy-btn {
+  font-size: 1.1rem;
+  min-height: 58px;
+  min-width: 94px;
+}
+
+.mode-note {
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 380px) {
+  .control {
+    grid-template-columns: 56px 1fr 56px 40px;
+    gap: 10px;
+  }
+
+  .control button {
+    width: 56px;
+    height: 56px;
+    font-size: 2rem;
+  }
+
+  input {
+    height: 58px;
+    font-size: 2.1rem;
+  }
+
+  .result-value {
+    font-size: clamp(3.8rem, 19vw, 5rem);
+  }
 }

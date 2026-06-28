@@ -1,4 +1,4 @@
-const CACHE_NAME = "edge-apex-companion-v11-no-hero";
+const CACHE_NAME = "edge-apex-companion-v12-large-controls";
 const FILES = [
   "./",
   "./index.html",

@@ -1,8 +1,9 @@
 # EDGE Apex Companion
 
-## Version 1.1
+## Version 1.2
 
 - Removed the large hero image for a cleaner app layout.
+- Enlarged phone controls, input numbers, units, and result display.
 - Kept the app icon, dark theme, calculator, PWA support, and Home Screen install support.
 
 
