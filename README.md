@@ -1,6 +1,6 @@
 # EDGE Apex Companion
 
-## Version 1.2
+## Version 1.3
 
 - Removed the large hero image for a cleaner app layout.
 - Enlarged phone controls, input numbers, units, and result display.
@@ -38,3 +38,9 @@ Precision sharpening calculator for the EDGE Apex workflow.
 - Sharpening history/log
 - Backup & Restore
 - Visual Setup Assistant
+
+
+### Version 1.3
+
+- Phone-first large controls release.
+- Updated cache version so GitHub Pages and Home Screen installs refresh correctly.

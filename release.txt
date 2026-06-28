@@ -1,0 +1,2 @@
+EDGE Apex Companion v1.3
+Phone-first large controls release.
