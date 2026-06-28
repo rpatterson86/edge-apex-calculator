@@ -1,2 +1,2 @@
-EDGE Apex Companion v1.5
-Update notice system release.
+EDGE Apex Companion v1.6
+Defaults settings release.
