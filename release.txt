@@ -1,2 +1,2 @@
-EDGE Apex Companion v1.8.1
-Preferences controls polish release.
+EDGE Apex Companion v1.8.2
+Preferences layout polish release.

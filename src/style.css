@@ -600,3 +600,138 @@ input {
     font-size: 1.02rem;
   }
 }
+
+
+/* v1.8.2 Preferences layout: units centered below numbers */
+.preferences-card {
+  padding: 18px;
+}
+
+.preference-section {
+  padding: 18px;
+  border-radius: 26px;
+}
+
+.preference-section summary {
+  font-size: 1.35rem;
+  font-weight: 950;
+  padding: 2px 0 8px;
+}
+
+.preference-section .field-card {
+  padding: 18px 16px 20px;
+  border-radius: 22px;
+  margin-top: 14px;
+}
+
+.preference-section .field-card label {
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 750;
+  margin: 0 0 14px 4px;
+  letter-spacing: -.015em;
+}
+
+.preference-section .control {
+  display: grid;
+  grid-template-columns: 66px minmax(132px, 1fr) 66px;
+  grid-template-rows: 52px 28px;
+  max-width: 360px;
+  gap: 0 16px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.preference-section .control button {
+  width: 66px;
+  height: 66px;
+  font-size: 2.25rem;
+  align-self: center;
+}
+
+.preference-section .control button:first-of-type {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.preference-section .control button:last-of-type {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+}
+
+.preference-section .control input {
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  height: 54px;
+  min-width: 0;
+  font-size: 2.35rem;
+  line-height: 1;
+  border-radius: 22px 22px 10px 10px;
+  background: rgba(255,255,255,.065);
+  padding: 0 8px;
+}
+
+.preference-section .control span {
+  grid-column: 2;
+  grid-row: 2;
+  display: block;
+  width: 100%;
+  height: 30px;
+  line-height: 28px;
+  margin-top: -1px;
+  border-radius: 10px 10px 22px 22px;
+  background: rgba(255,255,255,.065);
+  color: var(--muted);
+  font-size: 1.05rem;
+  font-weight: 850;
+  text-align: center;
+}
+
+.preference-section .primary-action {
+  margin-top: 20px;
+  min-height: 64px;
+  border-radius: 20px;
+  font-size: 1.2rem;
+}
+
+.preference-note {
+  margin-top: 18px;
+  font-size: .95rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 380px) {
+  .preferences-card {
+    padding: 14px;
+  }
+
+  .preference-section {
+    padding: 14px;
+  }
+
+  .preference-section .control {
+    grid-template-columns: 58px minmax(116px, 1fr) 58px;
+    grid-template-rows: 48px 26px;
+    gap: 0 10px;
+    max-width: 310px;
+  }
+
+  .preference-section .control button {
+    width: 58px;
+    height: 58px;
+    font-size: 2rem;
+  }
+
+  .preference-section .control input {
+    height: 50px;
+    font-size: 2rem;
+  }
+
+  .preference-section .control span {
+    height: 27px;
+    line-height: 25px;
+    font-size: .96rem;
+  }
+}

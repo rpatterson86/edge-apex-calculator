@@ -1,7 +1,7 @@
 let mode = "grip";
 let currentResult = "Grip Length: 154.5 mm";
 
-const APP_VERSION = "1.8.1";
+const APP_VERSION = "1.8.2";
 const BASE_SUPPORT_RADIUS = 6;
 const BASE_OFFSET = 154.43;
 const BASE_END_OFFSET = 14.11;
