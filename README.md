@@ -1,14 +1,11 @@
 # EDGE Apex Companion
 
-A cross-platform calculator for the Tradesman EDGE Apex.
+Development build for the Tradesman EDGE Apex calculator.
 
-## Version 3.1
+## Version 4.0
 
-Features:
-- Grip Length calculator
-- Support Clearance calculator
-- Grinding wheel diameter setting
-- Universal support diameter setting
+- Dark graphite / orange visual redesign
+- Interactive angle-style visualization
+- PWA manifest and service worker
+- iPhone Home Screen icon support
 - Manufacturer-aligned terminology
-- iPhone-friendly plus/minus controls
-- GitHub Pages compatible
