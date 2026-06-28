@@ -1,7 +1,7 @@
 let mode = "grip";
 let currentResult = "Grip Length: 154.5 mm";
 
-const APP_VERSION = "1.8";
+const APP_VERSION = "1.8.1";
 const BASE_SUPPORT_RADIUS = 6;
 const BASE_OFFSET = 154.43;
 const BASE_END_OFFSET = 14.11;
@@ -37,7 +37,13 @@ function setN(id, value) {
   const element = el(id);
   if (!element) return;
   const rounded = Math.round(value * 10) / 10;
-  element.value = rounded.toString() + unitFor(id);
+
+  const preferenceFields = ["wheel", "defaultAngle", "defaultClearance", "defaultGripLength"];
+  if (preferenceFields.includes(id)) {
+    element.value = rounded.toString();
+  } else {
+    element.value = rounded.toString() + unitFor(id);
+  }
 }
 
 function formatVisibleValues() {
@@ -196,7 +202,7 @@ function saveMySetup() {
   if (Number.isFinite(setup.defaultGripLength)) setN("gripLength", setup.defaultGripLength);
 
   update();
-  showToast("✓ My Setup Saved");
+  showToast("My Setup Saved");
 }
 
 function loadMySetup() {

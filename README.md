@@ -1,6 +1,6 @@
 # EDGE Apex Companion
 
-## Version 1.8
+## Version 1.8.1
 
 - Removed the large hero image for a cleaner app layout.
 - Enlarged phone controls, input numbers, units, and result display.
@@ -9,7 +9,7 @@
 
 Precision sharpening calculator for the EDGE Apex workflow.
 
-## Version 1.8 Milestone
+## Version 1.8.1 Milestone
 
 ### Complete
 
@@ -40,13 +40,13 @@ Precision sharpening calculator for the EDGE Apex workflow.
 - Visual Setup Assistant
 
 
-### Version 1.8
+### Version 1.8.1
 
 - Phone-first large controls release.
 - Updated cache version so GitHub Pages and Home Screen installs refresh correctly.
 
 
-### Version 1.8
+### Version 1.8.1
 
 - Centered controls for iPhone use.
 - Units are now shown inside the value fields.
@@ -54,7 +54,7 @@ Precision sharpening calculator for the EDGE Apex workflow.
 - Result card centered for easier reading.
 
 
-### Version 1.8
+### Version 1.8.1
 
 - Added update notification system.
 - Added Check for Update button in About.
@@ -62,7 +62,7 @@ Precision sharpening calculator for the EDGE Apex workflow.
 - Added version.json for future update checks.
 
 
-### Version 1.8
+### Version 1.8.1
 
 - Fixed default settings behavior.
 - Default Support Clearance applies only to the Grip Length tab.
@@ -71,10 +71,18 @@ Precision sharpening calculator for the EDGE Apex workflow.
 - Removed Universal Support Diameter from Settings and fixed it internally at 12 mm.
 
 
-### Version 1.8
+### Version 1.8.1
 
 - Added Preferences menu structure.
 - Added My Setup section.
 - Added Save My Setup button.
 - Added Updates and About sections.
 - My Setup now stores wheel diameter, default bevel angle, default support clearance, and default grip length.
+
+
+### Version 1.8.1
+
+- Polished Preferences controls.
+- Moved units outside Preference value boxes.
+- Improved label alignment and spacing.
+- Removed emoji from Save My Setup button.

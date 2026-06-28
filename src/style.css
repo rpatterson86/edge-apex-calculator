@@ -532,3 +532,71 @@ input {
   font-size: 1.15rem;
   box-shadow: 0 10px 24px rgba(255,138,0,.18);
 }
+
+
+/* v1.8.1 preferences polish: units outside the value box */
+.preference-section .field-card {
+  text-align: left;
+  padding: 18px 14px 20px;
+}
+
+.preference-section .field-card label {
+  text-align: left;
+  font-size: 1.05rem;
+  font-weight: 750;
+  margin-left: 4px;
+  margin-bottom: 14px;
+}
+
+.preference-section .control {
+  grid-template-columns: 64px minmax(138px, 1fr) 44px 64px;
+  max-width: 390px;
+  gap: 10px;
+}
+
+.preference-section .control span {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 850;
+  color: var(--muted);
+  text-align: left;
+}
+
+.preference-section .control input {
+  min-width: 0;
+  font-size: 2.15rem;
+  height: 66px;
+  border-radius: 20px;
+}
+
+.preference-section .control button {
+  width: 64px;
+  height: 64px;
+  font-size: 2.2rem;
+}
+
+.preference-section .primary-action {
+  margin-top: 18px;
+}
+
+@media (max-width: 380px) {
+  .preference-section .control {
+    grid-template-columns: 56px minmax(118px, 1fr) 38px 56px;
+    gap: 8px;
+  }
+
+  .preference-section .control button {
+    width: 56px;
+    height: 56px;
+    font-size: 2rem;
+  }
+
+  .preference-section .control input {
+    height: 60px;
+    font-size: 1.9rem;
+  }
+
+  .preference-section .control span {
+    font-size: 1.02rem;
+  }
+}
