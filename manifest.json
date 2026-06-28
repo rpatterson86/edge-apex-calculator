@@ -1,0 +1,10 @@
+{
+  "name": "EDGE Apex Companion",
+  "short_name": "EDGE Apex",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#111827",
+  "description": "Tradesman EDGE Apex grip length and support clearance calculator.",
+  "icons": []
+}
