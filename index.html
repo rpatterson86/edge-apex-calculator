@@ -4,11 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>EDGE Apex Companion</title>
+  <meta name="description" content="Grip Length and Support Clearance calculator for the EDGE Apex workflow.">
   <meta name="theme-color" content="#0D0F12">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="EDGE Apex">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="src/style.css">
 </head>
@@ -17,46 +19,125 @@
     <header class="app-header">
       <img class="app-icon" src="assets/icons/icon-192.png" alt="">
       <div>
-        <div class="eyebrow">Tradesman EDGE Apex</div>
         <h1>EDGE Apex Companion</h1>
+        <div class="subtitle">Precision Sharpening Calculator</div>
       </div>
     </header>
 
     <section class="hero-card">
+      <img class="hero-image" src="assets/images/hero.png" alt="Knife held in sharpening clamp with angle arc">
+    </section>
+
+    <section class="calculator-card">
       <div class="tabs" role="tablist" aria-label="Calculator mode">
         <button class="tab active" id="tabGrip" type="button">Grip Length</button>
         <button class="tab" id="tabClearance" type="button">Support Clearance</button>
       </div>
 
-      <div class="hero-icon-card" aria-hidden="true">
-        <img class="hero-icon" src="assets/icons/icon-512.png" alt="">
-        <div class="hero-title">Precision Sharpening Calculator</div>
-      </div>
-
       <section id="gripPanel" class="panel">
         <p class="mode-note">Bevel Angle + Support Clearance → Grip Length</p>
-        <div class="field-card"><label for="angleGrip">Bevel Angle</label><div class="control"><button type="button" onclick="stepValue('angleGrip',-0.5)">−</button><input id="angleGrip" value="15" inputmode="decimal"><button type="button" onclick="stepValue('angleGrip',0.5)">+</button><span>°</span></div></div>
-        <div class="field-card"><label for="clearance">Support Clearance</label><div class="control"><button type="button" onclick="stepValue('clearance',-1)">−</button><input id="clearance" value="80" inputmode="decimal"><button type="button" onclick="stepValue('clearance',1)">+</button><span>mm</span></div></div>
-        <div class="result-card"><div><div class="result-label">Grip Length</div><div id="gripLengthResult" class="result-value">154.5 mm</div><div id="gripHelp" class="result-help">Set your knife grip length to 154.5 mm.</div></div><button class="copy-btn" type="button" onclick="copyResult()">Copy</button></div>
+
+        <div class="field-card">
+          <label for="angleGrip">Bevel Angle</label>
+          <div class="control">
+            <button type="button" onclick="stepValue('angleGrip',-0.5)">−</button>
+            <input id="angleGrip" value="15" inputmode="decimal">
+            <button type="button" onclick="stepValue('angleGrip',0.5)">+</button>
+            <span>°</span>
+          </div>
+        </div>
+
+        <div class="field-card">
+          <label for="clearance">Support Clearance</label>
+          <div class="control">
+            <button type="button" onclick="stepValue('clearance',-1)">−</button>
+            <input id="clearance" value="80" inputmode="decimal">
+            <button type="button" onclick="stepValue('clearance',1)">+</button>
+            <span>mm</span>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <div>
+            <div class="result-label">Grip Length</div>
+            <div id="gripLengthResult" class="result-value">154.5 mm</div>
+            <div id="gripHelp" class="result-help">Set your knife grip length to 154.5 mm.</div>
+          </div>
+          <button class="copy-btn" type="button" onclick="copyResult()">Copy</button>
+        </div>
       </section>
 
       <section id="clearancePanel" class="panel hidden">
         <p class="mode-note">Bevel Angle + Grip Length → Support Clearance</p>
-        <div class="field-card"><label for="angleClearance">Bevel Angle</label><div class="control"><button type="button" onclick="stepValue('angleClearance',-0.5)">−</button><input id="angleClearance" value="15" inputmode="decimal"><button type="button" onclick="stepValue('angleClearance',0.5)">+</button><span>°</span></div></div>
-        <div class="field-card"><label for="gripLength">Grip Length</label><div class="control"><button type="button" onclick="stepValue('gripLength',-1)">−</button><input id="gripLength" value="154.5" inputmode="decimal"><button type="button" onclick="stepValue('gripLength',1)">+</button><span>mm</span></div></div>
-        <div class="result-card"><div><div class="result-label">Support Clearance</div><div id="clearanceResult" class="result-value">80.0 mm</div><div id="clearanceHelp" class="result-help">Set wheel-to-support clearance to 80.0 mm.</div></div><button class="copy-btn" type="button" onclick="copyResult()">Copy</button></div>
+
+        <div class="field-card">
+          <label for="angleClearance">Bevel Angle</label>
+          <div class="control">
+            <button type="button" onclick="stepValue('angleClearance',-0.5)">−</button>
+            <input id="angleClearance" value="15" inputmode="decimal">
+            <button type="button" onclick="stepValue('angleClearance',0.5)">+</button>
+            <span>°</span>
+          </div>
+        </div>
+
+        <div class="field-card">
+          <label for="gripLength">Grip Length</label>
+          <div class="control">
+            <button type="button" onclick="stepValue('gripLength',-1)">−</button>
+            <input id="gripLength" value="154.5" inputmode="decimal">
+            <button type="button" onclick="stepValue('gripLength',1)">+</button>
+            <span>mm</span>
+          </div>
+        </div>
+
+        <div class="result-card">
+          <div>
+            <div class="result-label">Support Clearance</div>
+            <div id="clearanceResult" class="result-value">80.0 mm</div>
+            <div id="clearanceHelp" class="result-help">Set wheel-to-support clearance to 80.0 mm.</div>
+          </div>
+          <button class="copy-btn" type="button" onclick="copyResult()">Copy</button>
+        </div>
       </section>
     </section>
 
-    <details class="settings-card"><summary>Settings</summary>
-      <div class="field-card compact"><label for="wheel">Grinding Wheel Diameter</label><div class="control"><button type="button" onclick="stepValue('wheel',-1)">−</button><input id="wheel" value="250" inputmode="decimal"><button type="button" onclick="stepValue('wheel',1)">+</button><span>mm</span></div></div>
-      <div class="field-card compact"><label for="support">Universal Support Diameter</label><div class="control"><button type="button" onclick="stepValue('support',-0.5)">−</button><input id="support" value="12" inputmode="decimal"><button type="button" onclick="stepValue('support',0.5)">+</button><span>mm</span></div></div>
+    <details class="settings-card">
+      <summary>Settings</summary>
+
+      <div class="field-card compact">
+        <label for="wheel">Grinding Wheel Diameter</label>
+        <div class="control">
+          <button type="button" onclick="stepValue('wheel',-1)">−</button>
+          <input id="wheel" value="250" inputmode="decimal">
+          <button type="button" onclick="stepValue('wheel',1)">+</button>
+          <span>mm</span>
+        </div>
+      </div>
+
+      <div class="field-card compact">
+        <label for="support">Universal Support Diameter</label>
+        <div class="control">
+          <button type="button" onclick="stepValue('support',-0.5)">−</button>
+          <input id="support" value="12" inputmode="decimal">
+          <button type="button" onclick="stepValue('support',0.5)">+</button>
+          <span>mm</span>
+        </div>
+      </div>
+
       <button class="secondary-action" type="button" onclick="resetDefaults()">Reset Defaults</button>
     </details>
 
-    <section class="install-card" id="installCard"><div><strong>Add to Home Screen</strong><p>Open in Safari, tap Share, then Add to Home Screen.</p></div><img src="assets/icons/icon-180.png" alt=""></section>
-    <footer class="footer">Version 4.1 development build</footer>
+    <section class="install-card">
+      <img src="assets/icons/icon-180.png" alt="">
+      <div>
+        <strong>Install on iPhone</strong>
+        <p>Open in Safari, tap Share, then choose Add to Home Screen.</p>
+      </div>
+    </section>
+
+    <footer class="footer">Version 4.2 development build</footer>
   </main>
+
   <div id="toast" role="status">Copied</div>
   <script src="src/app.js"></script>
 </body>

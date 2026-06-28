@@ -1,13 +1,16 @@
 # EDGE Apex Companion
 
-Development build for the Tradesman EDGE Apex calculator.
+Development build for the EDGE Apex Companion calculator.
 
-## Version 4.1
+## Version 4.2
 
-- Dark graphite / orange visual redesign
-- Interactive angle-style visualization
+- Wide responsive hero image so artwork is not cropped on iPhone
+- Dark graphite / orange visual system
+- Correct terminology:
+  - Bevel Angle
+  - Grip Length
+  - Support Clearance
+  - Grinding Wheel Diameter
+  - Universal Support Diameter
 - PWA manifest and service worker
 - iPhone Home Screen icon support
-- Manufacturer-aligned terminology
-
-- Replaced the separate blade/clamp hero graphic with the actual app icon artwork.
