@@ -175,20 +175,20 @@ function resetDefaults() {
 function save() {
   try {
     ["angleGrip", "clearance", "angleClearance", "gripLength", "wheel", "support"].forEach(id => {
-      localStorage.setItem("edgeApexV42_" + id, el(id).value);
+      localStorage.setItem("edgeApexV10_" + id, el(id).value);
     });
-    localStorage.setItem("edgeApexV42_mode", mode);
+    localStorage.setItem("edgeApexV10_mode", mode);
   } catch (e) {}
 }
 
 function load() {
   try {
     ["angleGrip", "clearance", "angleClearance", "gripLength", "wheel", "support"].forEach(id => {
-      const value = localStorage.getItem("edgeApexV42_" + id);
+      const value = localStorage.getItem("edgeApexV10_" + id);
       if (value !== null) el(id).value = value;
     });
 
-    const savedMode = localStorage.getItem("edgeApexV42_mode");
+    const savedMode = localStorage.getItem("edgeApexV10_mode");
     if (savedMode === "clearance") mode = "clearance";
   } catch (e) {}
 }

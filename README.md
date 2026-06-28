@@ -1,16 +1,33 @@
 # EDGE Apex Companion
 
-Development build for the EDGE Apex Companion calculator.
+Precision sharpening calculator for the EDGE Apex workflow.
 
-## Version 4.2
+## Version 1.0 Milestone
 
-- Wide responsive hero image so artwork is not cropped on iPhone
-- Dark graphite / orange visual system
-- Correct terminology:
-  - Bevel Angle
-  - Grip Length
-  - Support Clearance
-  - Grinding Wheel Diameter
-  - Universal Support Diameter
-- PWA manifest and service worker
-- iPhone Home Screen icon support
+### Complete
+
+- Custom app icon
+- Apple-inspired dark interface
+- Orange accent color system
+- Responsive hero artwork
+- Grip Length calculator
+- Support Clearance calculator
+- Correct terminology throughout
+- Input validation
+- Copy result button
+- Responsive on iPhone
+- Safari optimized
+- Add to Home Screen support
+- PWA support
+- Offline capable
+- Wheel diameter adjustment
+- Universal Support diameter adjustment
+- Remember last-used values
+
+## Next Development Phase
+
+- Knife Library
+- Saved sharpening setups
+- Sharpening history/log
+- Backup & Restore
+- Visual Setup Assistant
