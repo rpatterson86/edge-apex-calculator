@@ -60,24 +60,11 @@ h1 {
   font-weight: 850;
 }
 
-.hero-card, .calculator-card, .settings-card, .install-card {
+.calculator-card, .settings-card, .install-card {
   background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
   border: 1px solid rgba(255,255,255,.09);
   border-radius: 28px;
   box-shadow: 0 24px 70px rgba(0,0,0,.42);
-}
-
-.hero-card {
-  overflow: hidden;
-  padding: 10px;
-  margin-bottom: 16px;
-}
-
-.hero-image {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 22px;
 }
 
 .calculator-card {

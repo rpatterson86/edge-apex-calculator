@@ -1,11 +1,10 @@
-const CACHE_NAME = "edge-apex-companion-v10";
+const CACHE_NAME = "edge-apex-companion-v11-no-hero";
 const FILES = [
   "./",
   "./index.html",
   "./src/style.css",
   "./src/app.js",
   "./manifest.json",
-  "./assets/images/hero.png",
   "./assets/icons/icon-180.png",
   "./assets/icons/icon-192.png",
   "./assets/icons/icon-512.png"
