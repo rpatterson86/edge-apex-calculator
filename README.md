@@ -1,6 +1,6 @@
 # EDGE Apex Companion
 
-## Version 1.6
+## Version 1.7
 
 - Removed the large hero image for a cleaner app layout.
 - Enlarged phone controls, input numbers, units, and result display.
@@ -40,13 +40,13 @@ Precision sharpening calculator for the EDGE Apex workflow.
 - Visual Setup Assistant
 
 
-### Version 1.6
+### Version 1.7
 
 - Phone-first large controls release.
 - Updated cache version so GitHub Pages and Home Screen installs refresh correctly.
 
 
-### Version 1.6
+### Version 1.7
 
 - Centered controls for iPhone use.
 - Units are now shown inside the value fields.
@@ -54,7 +54,7 @@ Precision sharpening calculator for the EDGE Apex workflow.
 - Result card centered for easier reading.
 
 
-### Version 1.6
+### Version 1.7
 
 - Added update notification system.
 - Added Check for Update button in About.
@@ -62,8 +62,10 @@ Precision sharpening calculator for the EDGE Apex workflow.
 - Added version.json for future update checks.
 
 
-### Version 1.6
+### Version 1.7
 
-- Added settings for default bevel angle, default support clearance, and default grip length.
-- Added Apply Defaults button.
-- Removed Universal Support Diameter from Settings; it is now fixed internally at 12 mm.
+- Fixed default settings behavior.
+- Default Support Clearance applies only to the Grip Length tab.
+- Default Grip Length applies only to the Support Clearance tab.
+- Default Bevel Angle applies to both tabs.
+- Removed Universal Support Diameter from Settings and fixed it internally at 12 mm.

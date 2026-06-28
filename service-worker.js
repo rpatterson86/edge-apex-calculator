@@ -1,4 +1,4 @@
-const CACHE_NAME = "edge-apex-companion-v16-defaults-settings";
+const CACHE_NAME = "edge-apex-companion-v17-defaults-fixed";
 const FILES = [
   "./",
   "./index.html",

@@ -1,37 +1,62 @@
 let mode = "grip";
 let currentResult = "Grip Length: 154.5 mm";
 
+const APP_VERSION = "1.7";
 const BASE_SUPPORT_RADIUS = 6;
 const BASE_OFFSET = 154.43;
 const BASE_END_OFFSET = 14.11;
+const SUPPORT_DIAMETER = 12;
+
+const FIELD_IDS = [
+  "angleGrip",
+  "clearance",
+  "angleClearance",
+  "gripLength",
+  "wheel",
+  "defaultAngle",
+  "defaultClearance",
+  "defaultGripLength"
+];
 
 function el(id) {
   return document.getElementById(id);
 }
 
 function unitFor(id) {
-  if (id === "angleGrip" || id === "angleClearance") return "°";
+  if (id === "angleGrip" || id === "angleClearance" || id === "defaultAngle") return "°";
   return " mm";
 }
 
 function n(id) {
-  return parseFloat(String(el(id).value).replace(/[^0-9.\-]/g, ""));
+  const element = el(id);
+  if (!element) return NaN;
+  return parseFloat(String(element.value).replace(/[^0-9.\-]/g, ""));
 }
 
 function setN(id, value) {
+  const element = el(id);
+  if (!element) return;
+
   const rounded = Math.round(value * 10) / 10;
-  el(id).value = rounded.toString() + unitFor(id);
+  element.value = rounded.toString() + unitFor(id);
 }
 
 function formatVisibleValues() {
-  ["angleGrip", "clearance", "angleClearance", "gripLength", "wheel", "support"].forEach(id => {
+  FIELD_IDS.forEach(id => {
     const value = n(id);
     if (Number.isFinite(value)) setN(id, value);
   });
 }
 
+function ensureDefaultFields() {
+  if (!Number.isFinite(n("defaultAngle"))) setN("defaultAngle", 15);
+  if (!Number.isFinite(n("defaultClearance"))) setN("defaultClearance", 80);
+  if (!Number.isFinite(n("defaultGripLength"))) setN("defaultGripLength", 154.5);
+  if (!Number.isFinite(n("wheel"))) setN("wheel", 250);
+}
+
 function constants() {
-  const supportRadius = n("support") / 2;
+  const supportRadius = SUPPORT_DIAMETER / 2;
   const delta = supportRadius - BASE_SUPPORT_RADIUS;
 
   return {
@@ -57,15 +82,9 @@ function show(out, help, label, value, instruction) {
 
 function common(out, help) {
   const wheel = n("wheel");
-  const support = n("support");
 
   if (!Number.isFinite(wheel) || wheel < 200 || wheel > 300) {
     err(out, help, "Wheel 200–300 mm");
-    return false;
-  }
-
-  if (!Number.isFinite(support) || support < 8 || support > 20) {
-    err(out, help, "Support 8–20 mm");
     return false;
   }
 
@@ -158,7 +177,29 @@ function stepValue(id, step) {
   let value = n(id);
   if (!Number.isFinite(value)) value = 0;
   setN(id, value + step);
+
+  // Defaults are settings only. They should not overwrite the calculator until Apply Defaults is tapped.
   update();
+  save();
+}
+
+function applyDefaults() {
+  const defaultAngle = n("defaultAngle");
+
+  if (mode === "grip") {
+    // Grip Length tab uses Default Bevel Angle + Default Support Clearance.
+    if (Number.isFinite(defaultAngle)) setN("angleGrip", defaultAngle);
+    const defaultClearance = n("defaultClearance");
+    if (Number.isFinite(defaultClearance)) setN("clearance", defaultClearance);
+  } else {
+    // Support Clearance tab uses Default Bevel Angle + Default Grip Length.
+    if (Number.isFinite(defaultAngle)) setN("angleClearance", defaultAngle);
+    const defaultGripLength = n("defaultGripLength");
+    if (Number.isFinite(defaultGripLength)) setN("gripLength", defaultGripLength);
+  }
+
+  update();
+  save();
 }
 
 function copyResult() {
@@ -176,51 +217,17 @@ function showToast() {
 }
 
 function resetDefaults() {
+  setN("defaultAngle", 15);
+  setN("defaultClearance", 80);
+  setN("defaultGripLength", 154.5);
   setN("angleGrip", 15);
   setN("clearance", 80);
   setN("angleClearance", 15);
   setN("gripLength", 154.5);
   setN("wheel", 250);
-  setN("support", 12);
   update();
+  save();
 }
-
-function save() {
-  try {
-    ["angleGrip", "clearance", "angleClearance", "gripLength", "wheel", "support"].forEach(id => {
-      localStorage.setItem("edgeApexV10_" + id, el(id).value);
-    });
-    localStorage.setItem("edgeApexV10_mode", mode);
-  } catch (e) {}
-}
-
-function load() {
-  try {
-    ["angleGrip", "clearance", "angleClearance", "gripLength", "wheel", "support"].forEach(id => {
-      const value = localStorage.getItem("edgeApexV10_" + id);
-      if (value !== null) el(id).value = value;
-    });
-
-    const savedMode = localStorage.getItem("edgeApexV10_mode");
-    if (savedMode === "clearance") mode = "clearance";
-  } catch (e) {}
-}
-
-el("tabGrip").onclick = () => switchMode("grip");
-el("tabClearance").onclick = () => switchMode("clearance");
-
-["angleGrip", "clearance", "angleClearance", "gripLength", "wheel", "support"].forEach(id => {
-  el(id).addEventListener("focus", () => el(id).select());
-  el(id).addEventListener("input", update);
-  el(id).addEventListener("change", () => {
-    const value = n(id);
-    if (Number.isFinite(value)) setN(id, value);
-    update();
-  });
-});
-
-
-const APP_VERSION = "1.5";
 
 function parseVersion(version) {
   return String(version).split(".").map(part => parseInt(part, 10) || 0);
@@ -277,6 +284,44 @@ async function updateNow() {
   }
 }
 
+function save() {
+  try {
+    FIELD_IDS.forEach(id => {
+      localStorage.setItem("edgeApexV17_" + id, el(id).value);
+    });
+    localStorage.setItem("edgeApexV17_mode", mode);
+  } catch (e) {}
+}
+
+function load() {
+  try {
+    FIELD_IDS.forEach(id => {
+      const value = localStorage.getItem("edgeApexV17_" + id);
+      if (value !== null && el(id)) el(id).value = value;
+    });
+
+    const savedMode = localStorage.getItem("edgeApexV17_mode");
+    if (savedMode === "clearance") mode = "clearance";
+  } catch (e) {}
+}
+
+el("tabGrip").onclick = () => switchMode("grip");
+el("tabClearance").onclick = () => switchMode("clearance");
+
+FIELD_IDS.forEach(id => {
+  const element = el(id);
+  if (!element) return;
+
+  element.addEventListener("focus", () => element.select());
+  element.addEventListener("input", update);
+  element.addEventListener("change", () => {
+    const value = n(id);
+    if (Number.isFinite(value)) setN(id, value);
+    update();
+    save();
+  });
+});
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./service-worker.js").catch(() => {});
@@ -284,6 +329,7 @@ if ("serviceWorker" in navigator) {
 }
 
 load();
+ensureDefaultFields();
 formatVisibleValues();
 switchMode(mode);
 checkForUpdate(false);

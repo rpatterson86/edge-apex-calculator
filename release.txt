@@ -1,2 +1,2 @@
-EDGE Apex Companion v1.6
-Defaults settings release.
+EDGE Apex Companion v1.7
+Defaults fixed release.
