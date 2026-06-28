@@ -1,4 +1,4 @@
-const CACHE_NAME = "edge-apex-companion-v182-preferences-layout";
+const CACHE_NAME = "edge-apex-companion-v184-main-controls-style";
 const FILES = [
   "./",
   "./index.html",

@@ -1,7 +1,7 @@
 let mode = "grip";
 let currentResult = "Grip Length: 154.5 mm";
 
-const APP_VERSION = "1.8.2";
+const APP_VERSION = "1.8.4";
 const BASE_SUPPORT_RADIUS = 6;
 const BASE_OFFSET = 154.43;
 const BASE_END_OFFSET = 14.11;
@@ -37,13 +37,7 @@ function setN(id, value) {
   const element = el(id);
   if (!element) return;
   const rounded = Math.round(value * 10) / 10;
-
-  const preferenceFields = ["wheel", "defaultAngle", "defaultClearance", "defaultGripLength"];
-  if (preferenceFields.includes(id)) {
-    element.value = rounded.toString();
-  } else {
-    element.value = rounded.toString() + unitFor(id);
-  }
+  element.value = rounded.toString();
 }
 
 function formatVisibleValues() {
@@ -276,8 +270,13 @@ async function checkForUpdate(showIfCurrent = false) {
     const msg = el("updateMessage");
 
     if (isNewerVersion(info.version, APP_VERSION)) {
-      msg.textContent = "Version " + info.version + " is available. You are using version " + APP_VERSION + ".";
+      const updateText = "Update available: version " + info.version + ". You are using version " + APP_VERSION + ".";
+      msg.textContent = updateText;
       card.classList.remove("hidden");
+
+      if (showIfCurrent) {
+        alert(updateText + "\n\nTap Update Now, then close and reopen the Home Screen app.");
+      }
     } else if (showIfCurrent) {
       alert("You are up to date. Current version: " + APP_VERSION);
     }
