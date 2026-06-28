@@ -9,12 +9,25 @@ function el(id) {
   return document.getElementById(id);
 }
 
+function unitFor(id) {
+  if (id === "angleGrip" || id === "angleClearance") return "°";
+  return " mm";
+}
+
 function n(id) {
-  return parseFloat(el(id).value);
+  return parseFloat(String(el(id).value).replace(/[^0-9.\-]/g, ""));
 }
 
 function setN(id, value) {
-  el(id).value = (Math.round(value * 10) / 10).toString();
+  const rounded = Math.round(value * 10) / 10;
+  el(id).value = rounded.toString() + unitFor(id);
+}
+
+function formatVisibleValues() {
+  ["angleGrip", "clearance", "angleClearance", "gripLength", "wheel", "support"].forEach(id => {
+    const value = n(id);
+    if (Number.isFinite(value)) setN(id, value);
+  });
 }
 
 function constants() {
@@ -197,8 +210,13 @@ el("tabGrip").onclick = () => switchMode("grip");
 el("tabClearance").onclick = () => switchMode("clearance");
 
 ["angleGrip", "clearance", "angleClearance", "gripLength", "wheel", "support"].forEach(id => {
+  el(id).addEventListener("focus", () => el(id).select());
   el(id).addEventListener("input", update);
-  el(id).addEventListener("change", update);
+  el(id).addEventListener("change", () => {
+    const value = n(id);
+    if (Number.isFinite(value)) setN(id, value);
+    update();
+  });
 });
 
 if ("serviceWorker" in navigator) {
@@ -208,4 +226,5 @@ if ("serviceWorker" in navigator) {
 }
 
 load();
+formatVisibleValues();
 switchMode(mode);

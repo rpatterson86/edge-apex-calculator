@@ -362,3 +362,97 @@ label {
     font-size: clamp(3.8rem, 19vw, 5rem);
   }
 }
+
+
+/* v1.4 centered phone controls */
+.field-card {
+  text-align: center;
+  padding: 20px 16px 22px;
+}
+
+label {
+  text-align: center;
+  font-size: 1.28rem;
+  margin-bottom: 14px;
+}
+
+.control {
+  display: grid;
+  grid-template-columns: 72px minmax(128px, 1fr) 72px;
+  gap: 14px;
+  align-items: center;
+  justify-content: center;
+  max-width: 330px;
+  margin: 0 auto;
+}
+
+.control button {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+.control span {
+  display: none;
+}
+
+input {
+  height: 72px;
+  font-size: 2.45rem;
+  border-radius: 22px;
+}
+
+.result-card {
+  display: block;
+  text-align: center;
+  padding: 22px 18px;
+}
+
+.result-value {
+  font-size: clamp(4.5rem, 22vw, 6rem);
+  margin-top: 8px;
+}
+
+.result-help {
+  font-size: 1.12rem;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.copy-btn {
+  margin-top: 18px;
+  width: min(100%, 220px);
+  min-height: 60px;
+  font-size: 1.15rem;
+}
+
+.mode-note {
+  text-align: center;
+  font-size: 1.08rem;
+}
+
+@media (max-width: 380px) {
+  .control {
+    grid-template-columns: 62px minmax(108px, 1fr) 62px;
+    gap: 10px;
+    max-width: 290px;
+  }
+
+  .control button {
+    width: 62px;
+    height: 62px;
+    font-size: 2.15rem;
+  }
+
+  input {
+    height: 64px;
+    font-size: 2.15rem;
+  }
+
+  .result-value {
+    font-size: clamp(3.9rem, 20vw, 5.2rem);
+  }
+}

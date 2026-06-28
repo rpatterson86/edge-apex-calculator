@@ -1,2 +1,2 @@
-EDGE Apex Companion v1.3
-Phone-first large controls release.
+EDGE Apex Companion v1.4
+Centered phone controls release.
