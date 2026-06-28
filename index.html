@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>EDGE Apex Companion v1.7</title>
+  <title>EDGE Apex Companion v1.8</title>
   <meta name="description" content="Grip Length and Support Clearance calculator for the EDGE Apex workflow.">
   <meta name="theme-color" content="#0D0F12">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -97,68 +97,79 @@
       </section>
     </section>
 
-    <details class="settings-card">
-      <summary>Settings</summary>
+    <section class="preferences-card">
+      <h2>Preferences</h2>
 
-      <div class="field-card compact">
-        <label for="wheel">Grinding Wheel Diameter</label>
-        <div class="control">
-          <button type="button" onclick="stepValue('wheel',-1)">−</button>
-          <input id="wheel" value="250" inputmode="decimal">
-          <button type="button" onclick="stepValue('wheel',1)">+</button>
-          <span>mm</span>
+      <details class="preference-section" open>
+        <summary>My Setup</summary>
+
+        <div class="field-card compact">
+          <label for="wheel">Grinding Wheel Diameter</label>
+          <div class="control">
+            <button type="button" onclick="stepValue('wheel',-1)">−</button>
+            <input id="wheel" value="250 mm" inputmode="decimal">
+            <button type="button" onclick="stepValue('wheel',1)">+</button>
+            <span>mm</span>
+          </div>
         </div>
-      </div>
 
-      <div class="field-card compact">
-        <label for="defaultAngle">Default Bevel Angle</label>
-        <div class="control">
-          <button type="button" onclick="stepValue('defaultAngle',-0.5)">−</button>
-          <input id="defaultAngle" value="15" inputmode="decimal">
-          <button type="button" onclick="stepValue('defaultAngle',0.5)">+</button>
-          <span>°</span>
+        <div class="field-card compact">
+          <label for="defaultAngle">Default Bevel Angle</label>
+          <div class="control">
+            <button type="button" onclick="stepValue('defaultAngle',-0.5)">−</button>
+            <input id="defaultAngle" value="15°" inputmode="decimal">
+            <button type="button" onclick="stepValue('defaultAngle',0.5)">+</button>
+            <span>°</span>
+          </div>
         </div>
-      </div>
 
-      <div class="field-card compact">
-        <label for="defaultClearance">Default Support Clearance</label>
-        <div class="control">
-          <button type="button" onclick="stepValue('defaultClearance',-1)">−</button>
-          <input id="defaultClearance" value="80" inputmode="decimal">
-          <button type="button" onclick="stepValue('defaultClearance',1)">+</button>
-          <span>mm</span>
+        <div class="field-card compact">
+          <label for="defaultClearance">Default Support Clearance</label>
+          <div class="control">
+            <button type="button" onclick="stepValue('defaultClearance',-1)">−</button>
+            <input id="defaultClearance" value="80 mm" inputmode="decimal">
+            <button type="button" onclick="stepValue('defaultClearance',1)">+</button>
+            <span>mm</span>
+          </div>
         </div>
-      </div>
 
-      <div class="field-card compact">
-        <label for="defaultGripLength">Default Grip Length</label>
-        <div class="control">
-          <button type="button" onclick="stepValue('defaultGripLength',-1)">−</button>
-          <input id="defaultGripLength" value="154.5" inputmode="decimal">
-          <button type="button" onclick="stepValue('defaultGripLength',1)">+</button>
-          <span>mm</span>
+        <div class="field-card compact">
+          <label for="defaultGripLength">Default Grip Length</label>
+          <div class="control">
+            <button type="button" onclick="stepValue('defaultGripLength',-1)">−</button>
+            <input id="defaultGripLength" value="154.5 mm" inputmode="decimal">
+            <button type="button" onclick="stepValue('defaultGripLength',1)">+</button>
+            <span>mm</span>
+          </div>
         </div>
-      </div>
 
-      <button class="secondary-action" type="button" onclick="applyDefaults()">Apply Defaults to Current Tab</button>
+        <button class="primary-action" type="button" onclick="saveMySetup()">💾 Save My Setup</button>
 
-      <button class="secondary-action" type="button" onclick="resetDefaults()">Reset Defaults</button>
-    </details>
+        <p class="preference-note">
+          Default Support Clearance is used by the <strong>Grip Length</strong> calculator.
+          Default Grip Length is used by the <strong>Support Clearance</strong> calculator.
+        </p>
+      </details>
 
-    <details class="settings-card">
-      <summary>About This App</summary>
-      <p class="about-copy">EDGE Apex Companion is a development build for calculating Grip Length and Support Clearance.</p>
-      <p class="about-copy"><strong>Current version:</strong> 1.7</p>
-      <button class="secondary-action" type="button" onclick="checkForUpdate(true)">Check for Update</button>
-      <ul class="checklist">
-        <li>✅ App icon finalized</li>
-        <li>✅ Hero image finalized</li>
-        <li>✅ Grip Length calculator</li>
-        <li>✅ Support Clearance calculator</li>
-        <li>✅ Add to Home Screen support</li>
-        <li>✅ Offline support</li>
-      </ul>
-    </details>
+      <details class="preference-section">
+        <summary>Updates</summary>
+        <p class="about-copy"><strong>Current version:</strong> 1.8</p>
+        <button class="secondary-action" type="button" onclick="checkForUpdate(true)">Check for Update</button>
+        <p class="about-copy">If a Home Screen app does not refresh after an update, close it completely and reopen it. If needed, remove it from the Home Screen and add it again from Safari.</p>
+      </details>
+
+      <details class="preference-section">
+        <summary>About</summary>
+        <p class="about-copy">EDGE Apex Companion is a development build for calculating Grip Length and Support Clearance.</p>
+        <ul class="checklist">
+          <li>✅ Grip Length calculator</li>
+          <li>✅ Support Clearance calculator</li>
+          <li>✅ Add to Home Screen support</li>
+          <li>✅ Offline support</li>
+          <li>✅ My Setup preferences</li>
+        </ul>
+      </details>
+    </section>
 
     <section class="install-card">
       <img src="assets/icons/icon-180.png" alt="">
@@ -183,7 +194,7 @@
       <button class="secondary-action" type="button" onclick="updateNow()">Update Now</button>
     </section>
 
-    <footer class="footer">Version 1.7 defaults fixed development build</footer>
+    <footer class="footer">Version 1.8 preferences development build</footer>
   </main>
 
   <div id="toast" role="status">Copied</div>

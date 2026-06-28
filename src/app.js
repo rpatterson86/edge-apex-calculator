@@ -1,7 +1,7 @@
 let mode = "grip";
 let currentResult = "Grip Length: 154.5 mm";
 
-const APP_VERSION = "1.7";
+const APP_VERSION = "1.8";
 const BASE_SUPPORT_RADIUS = 6;
 const BASE_OFFSET = 154.43;
 const BASE_END_OFFSET = 14.11;
@@ -36,7 +36,6 @@ function n(id) {
 function setN(id, value) {
   const element = el(id);
   if (!element) return;
-
   const rounded = Math.round(value * 10) / 10;
   element.value = rounded.toString() + unitFor(id);
 }
@@ -74,9 +73,7 @@ function err(out, help, msg) {
 function show(out, help, label, value, instruction) {
   out.className = "result-value";
   out.textContent = value.toFixed(1) + " mm";
-
   if (help) help.textContent = instruction.replace("{value}", value.toFixed(1));
-
   currentResult = label + ": " + value.toFixed(1) + " mm";
 }
 
@@ -87,7 +84,6 @@ function common(out, help) {
     err(out, help, "Wheel 200–300 mm");
     return false;
   }
-
   return true;
 }
 
@@ -125,14 +121,13 @@ function calcGripLength() {
     err(out, help, "Angle 5–35°");
     return;
   }
-
   if (!Number.isFinite(clearance) || clearance < 40 || clearance > 120) {
     err(out, help, "Clearance 40–120 mm");
     return;
   }
 
   show(out, help, "Grip Length", gripLengthFromClearance(angle, clearance), "Set your knife grip length to {value} mm.");
-  save();
+  saveSessionValues();
 }
 
 function calcClearance() {
@@ -147,14 +142,13 @@ function calcClearance() {
     err(out, help, "Angle 5–35°");
     return;
   }
-
   if (!Number.isFinite(gripLength) || gripLength < 80 || gripLength > 230) {
     err(out, help, "Grip Length 80–230 mm");
     return;
   }
 
   show(out, help, "Support Clearance", clearanceFromGripLength(angle, gripLength), "Set wheel-to-support clearance to {value} mm.");
-  save();
+  saveSessionValues();
 }
 
 function update() {
@@ -164,12 +158,10 @@ function update() {
 
 function switchMode(nextMode) {
   mode = nextMode;
-
   el("gripPanel").className = mode === "grip" ? "panel" : "panel hidden";
   el("clearancePanel").className = mode === "clearance" ? "panel" : "panel hidden";
   el("tabGrip").className = mode === "grip" ? "tab active" : "tab";
   el("tabClearance").className = mode === "clearance" ? "tab active" : "tab";
-
   update();
 }
 
@@ -177,43 +169,70 @@ function stepValue(id, step) {
   let value = n(id);
   if (!Number.isFinite(value)) value = 0;
   setN(id, value + step);
-
-  // Defaults are settings only. They should not overwrite the calculator until Apply Defaults is tapped.
   update();
-  save();
+  saveSessionValues();
 }
 
-function applyDefaults() {
-  const defaultAngle = n("defaultAngle");
+function saveMySetup() {
+  // Save the values currently shown in Preferences as the user's opening defaults.
+  const setup = {
+    wheel: n("wheel"),
+    defaultAngle: n("defaultAngle"),
+    defaultClearance: n("defaultClearance"),
+    defaultGripLength: n("defaultGripLength")
+  };
 
-  if (mode === "grip") {
-    // Grip Length tab uses Default Bevel Angle + Default Support Clearance.
-    if (Number.isFinite(defaultAngle)) setN("angleGrip", defaultAngle);
-    const defaultClearance = n("defaultClearance");
-    if (Number.isFinite(defaultClearance)) setN("clearance", defaultClearance);
-  } else {
-    // Support Clearance tab uses Default Bevel Angle + Default Grip Length.
-    if (Number.isFinite(defaultAngle)) setN("angleClearance", defaultAngle);
-    const defaultGripLength = n("defaultGripLength");
-    if (Number.isFinite(defaultGripLength)) setN("gripLength", defaultGripLength);
+  try {
+    localStorage.setItem("edgeApexSetupV18", JSON.stringify(setup));
+  } catch (e) {}
+
+  // Also apply the setup to the calculator immediately so the user sees what was saved.
+  if (Number.isFinite(setup.wheel)) setN("wheel", setup.wheel);
+  if (Number.isFinite(setup.defaultAngle)) {
+    setN("angleGrip", setup.defaultAngle);
+    setN("angleClearance", setup.defaultAngle);
   }
+  if (Number.isFinite(setup.defaultClearance)) setN("clearance", setup.defaultClearance);
+  if (Number.isFinite(setup.defaultGripLength)) setN("gripLength", setup.defaultGripLength);
 
   update();
-  save();
+  showToast("✓ My Setup Saved");
+}
+
+function loadMySetup() {
+  try {
+    const setup = JSON.parse(localStorage.getItem("edgeApexSetupV18") || "{}");
+
+    if (Number.isFinite(setup.wheel)) setN("wheel", setup.wheel);
+    if (Number.isFinite(setup.defaultAngle)) {
+      setN("defaultAngle", setup.defaultAngle);
+      setN("angleGrip", setup.defaultAngle);
+      setN("angleClearance", setup.defaultAngle);
+    }
+    if (Number.isFinite(setup.defaultClearance)) {
+      setN("defaultClearance", setup.defaultClearance);
+      setN("clearance", setup.defaultClearance);
+    }
+    if (Number.isFinite(setup.defaultGripLength)) {
+      setN("defaultGripLength", setup.defaultGripLength);
+      setN("gripLength", setup.defaultGripLength);
+    }
+  } catch (e) {}
 }
 
 function copyResult() {
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(currentResult).then(showToast).catch(() => alert(currentResult));
+    navigator.clipboard.writeText(currentResult).then(() => showToast("Copied")).catch(() => alert(currentResult));
   } else {
     alert(currentResult);
   }
 }
 
-function showToast() {
+function showToast(message = "Copied") {
   const toast = el("toast");
+  toast.textContent = message;
   toast.classList.add("show");
-  setTimeout(() => toast.classList.remove("show"), 1200);
+  setTimeout(() => toast.classList.remove("show"), 1400);
 }
 
 function resetDefaults() {
@@ -225,8 +244,7 @@ function resetDefaults() {
   setN("angleClearance", 15);
   setN("gripLength", 154.5);
   setN("wheel", 250);
-  update();
-  save();
+  saveMySetup();
 }
 
 function parseVersion(version) {
@@ -272,35 +290,33 @@ async function updateNow() {
         await registration.update();
       }
     }
-
     if ("caches" in window) {
       const keys = await caches.keys();
       await Promise.all(keys.map(key => caches.delete(key)));
     }
-
     window.location.reload();
   } catch (error) {
     alert("To update: close this app completely, then reopen it. If needed, remove it from Home Screen and add it again from Safari.");
   }
 }
 
-function save() {
+function saveSessionValues() {
   try {
     FIELD_IDS.forEach(id => {
-      localStorage.setItem("edgeApexV17_" + id, el(id).value);
+      const element = el(id);
+      if (element) localStorage.setItem("edgeApexSessionV18_" + id, element.value);
     });
-    localStorage.setItem("edgeApexV17_mode", mode);
+    localStorage.setItem("edgeApexSessionV18_mode", mode);
   } catch (e) {}
 }
 
-function load() {
+function loadSessionValues() {
   try {
     FIELD_IDS.forEach(id => {
-      const value = localStorage.getItem("edgeApexV17_" + id);
+      const value = localStorage.getItem("edgeApexSessionV18_" + id);
       if (value !== null && el(id)) el(id).value = value;
     });
-
-    const savedMode = localStorage.getItem("edgeApexV17_mode");
+    const savedMode = localStorage.getItem("edgeApexSessionV18_mode");
     if (savedMode === "clearance") mode = "clearance";
   } catch (e) {}
 }
@@ -318,7 +334,7 @@ FIELD_IDS.forEach(id => {
     const value = n(id);
     if (Number.isFinite(value)) setN(id, value);
     update();
-    save();
+    saveSessionValues();
   });
 });
 
@@ -328,8 +344,9 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-load();
+loadSessionValues();
 ensureDefaultFields();
+loadMySetup();
 formatVisibleValues();
 switchMode(mode);
 checkForUpdate(false);
